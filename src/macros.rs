@@ -30,16 +30,7 @@ macro_rules! impl_from_tree {
     ) => {
         impl<Pk $(, $gen)* $(, $ext)?> $crate::expression::FromTree for $name
         where
-            Pk: MiniscriptKey + core::str::FromStr,
-            Pk::Sha256: core::str::FromStr,
-            Pk::Hash256: core::str::FromStr,
-            Pk::Ripemd160: core::str::FromStr,
-            Pk::Hash160: core::str::FromStr,
-            <Pk as core::str::FromStr>::Err: std::string::ToString,
-            <<Pk as MiniscriptKey>::Sha256 as core::str::FromStr>::Err: std::string::ToString,
-            <<Pk as MiniscriptKey>::Hash256 as core::str::FromStr>::Err: std::string::ToString,
-            <<Pk as MiniscriptKey>::Ripemd160 as core::str::FromStr>::Err: std::string::ToString,
-            <<Pk as MiniscriptKey>::Hash160 as core::str::FromStr>::Err: std::string::ToString,
+            Pk: bitcoin_miniscript::FromStrKey,
             $($gen : $gen_con,)*
             $($ext: $trt)?
             {
